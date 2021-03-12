@@ -1,10 +1,10 @@
 import React from "react";
-import NavbarIn from "../components/navbar-in";
+import Navbar from "../components/navbar-out";
 
-const HomeIn = () => {
+const HomeOut = () => {
   return (
     <div>
-      <NavbarIn />
+      <Navbar />
       <div className="home-header">
         <div className="header-title">
           <div className="title-content">
@@ -108,4 +108,4 @@ const HomeIn = () => {
   );
 };
 
-export default HomeIn;
+export default HomeOut;

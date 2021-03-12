@@ -132,8 +132,19 @@ h6 {
   background-color: #e5e5e5;
 }
 
+/* MENU */
+.order-btn {
+  background-color: #ffc700;
+  color: black;
+}
+.order-btn:hover {
+  background-color: #433434;
+  color: #fff;
+}
+
 .restaurant {
   padding: 59px 13% 91px 13%;
+  background-color: #e5e5e5;
 }
 .restaurant-card {
   background-color: #fff;
@@ -148,4 +159,20 @@ h6 {
 .card {
   padding: 10px 10px;
   width: 100%;
+}
+
+/* PROFILE */
+.profile {
+  background-color: #e5e5e5;
+  height: auto;
+}
+
+.location-btn {
+  width: 200px;
+  color: #fff;
+  background-color: #433434;
+}
+.location-btn:hover {
+  color: black;
+  background-color: #ffc700;
 }

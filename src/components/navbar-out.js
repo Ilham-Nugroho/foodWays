@@ -1,7 +1,7 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const NavbarIn = () => {
+const NavbarComponent = () => {
   return (
     <Navbar id="nav" expand="lg" variant="dark">
       <Navbar.Brand href="/" className="text-light" id="brand">
@@ -10,11 +10,11 @@ const NavbarIn = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto ">
-          <Nav.Link as={Link} to="/cart" className="text-dark">
-            <img src="./img/cart.png" />
+          <Nav.Link as={Link} to="/login" className="text-dark">
+            <button className="btn btn-md nav-login-btn">Log In</button>
           </Nav.Link>
-          <Nav.Link as={Link} to="/profile" className="text-dark">
-            <img src="./img/profil.png" />
+          <Nav.Link as={Link} to="/register" className="text-dark">
+            <button className="btn btn-md nav-login-btn">Register</button>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
@@ -22,4 +22,4 @@ const NavbarIn = () => {
   );
 };
 
-export default NavbarIn;
+export default NavbarComponent;
