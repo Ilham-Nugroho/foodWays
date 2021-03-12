@@ -17,7 +17,7 @@ function Login() {
 
     <button className=" btn btn-lg login-btn" type="submit">Log in</button>
 
-    <div className="mb-3">
+    <div className="mt-3">
       <label> Don't have an account? Click 
       <Link to="/register"> Here</Link>
       </label>

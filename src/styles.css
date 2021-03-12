@@ -1,4 +1,18 @@
 /* CUSTOM */
+@font-face {
+  src: "https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap";
+  font-family: "Abhaya Libre";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Abhaya Libre";
+}
+
 /* LOG IN & REGISTER */
 .text-center {
   display: flex;
@@ -45,9 +59,93 @@
 }
 
 #nav {
-  height: 61px;
+  height: 91px;
   background-color: #ffc700;
 }
 #basic-navbar-nav {
   margin-right: 65px;
+}
+
+.nav-login-btn {
+  background-color: #433434;
+  color: #fff;
+  width: 100px;
+}
+.nav-login-btn:hover {
+  color: #fff;
+  border-color: #fff;
+  border-width: 2px;
+}
+/* HOME */
+.home-header {
+  min-height: 500px;
+  background-color: #ffc700;
+}
+
+.header-title {
+  display: flex;
+  padding: 64px 15% 0px 15%;
+}
+
+@media only screen and (max-width: 990px) {
+  .header-title {
+    display: block;
+  }
+}
+
+.content-desc {
+  display: flex;
+  margin-top: 28px;
+}
+@media only screen and (max-width: 990px) {
+  .content-desc {
+    display: block;
+  }
+}
+.content-desc img {
+  height: 5px;
+  width: 30%;
+}
+.content-desc p {
+  margin-left: 26px;
+}
+@media only screen and (max-width: 990px) {
+  .content-desc p {
+    margin-left: 0;
+  }
+}
+
+.header-pizza {
+  justify-content: center;
+  display: flex;
+}
+.header-pizza img {
+  width: 35vw;
+}
+@media only screen and (max-width: 990px) {
+  .header-pizza img {
+    width: 50vw;
+  }
+}
+
+.home-content {
+  background-color: #e5e5e5;
+}
+
+.restaurant {
+  padding: 59px 13% 91px 13%;
+}
+.restaurant-card {
+  background-color: #fff;
+  padding: 10px 5% 10px 5%;
+  display: flex;
+  align-items: center;
+}
+.restaurant-card h5 {
+  padding: 0 5% 0 5%;
+}
+
+.card {
+  padding: 10px 10px;
+  width: 100%;
 }
