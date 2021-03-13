@@ -1,10 +1,58 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useHistory, Link } from "react-router-dom";
+
+import { Modal, Button } from "react-bootstrap";
+
+import { UserContext } from "../context/userContext";
+
 import NavbarIn from "../components/navbar-in";
+import NavbarOut from "../components/navbar-out";
 
 const HomeIn = () => {
+  const router = useHistory();
+  const [state, dispatch] = useContext(UserContext);
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    fullname: "",
+    gender: "",
+    phone: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  function handleClick(event) {
+    event.preventDefault();
+  }
+
+  const LoginUser = () => {
+    dispatch({
+      type: "LOGIN_SUCCESS",
+    });
+    handleClose();
+    router.push("/menu");
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleClose2 = () => {
+    setShow2(false);
+  };
+
   return (
     <div>
-      <NavbarIn />
+      {state.isLogin ? <NavbarIn /> : <NavbarOut />}
       <div className="home-header">
         <div className="header-title">
           <div className="title-content">
@@ -33,7 +81,10 @@ const HomeIn = () => {
           </div>
 
           <div className="row mt-2">
-            <div className="mt-2 col-lg-3 col-md-6">
+            <div
+              className="mt-2 col-lg-3 col-md-6"
+              onClick={() => setShow(true)}
+            >
               <div className="restaurant-card">
                 <img src="./img/burgerking.png" />
                 <h5>Burger King</h5>
@@ -101,9 +152,148 @@ const HomeIn = () => {
             </div>
           </div>
         </div>
-
-        <div>RESTAURANT MENU HERE</div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <div className="form-signin">
+              <form>
+                <h1 className="login-h1">Log In</h1>
+
+                <input
+                  onChange={handleChange}
+                  name="email"
+                  value={user.email}
+                  type="email"
+                  className="form-control login-input"
+                  placeholder="Email Address"
+                  autofocus
+                />
+                <pre>{JSON.stringify(user.email, 2, null)}</pre>
+                <input
+                  onChange={handleChange}
+                  value={user.password}
+                  name="password"
+                  type="password"
+                  className="form-control login-input"
+                  placeholder="Password"
+                />
+                <pre>{JSON.stringify(user.password, 2, null)}</pre>
+
+                <button
+                  className=" btn btn-lg login-btn"
+                  onClick={LoginUser}
+                  type="submit"
+                >
+                  Log in
+                </button>
+
+                <div className="mt-3">
+                  <label>
+                    Don't have an account? Click
+                    <span
+                      style={{ cursor: "pointer" }}
+                      variant="primary"
+                      onClick={() => {
+                        handleClose();
+                        setShow2(true);
+                      }}
+                    >
+                      Here
+                    </span>
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <div className="form-signin">
+              <form>
+                <h1 className="login-h1">Register</h1>
+
+                <input
+                  onChange={handleChange}
+                  name="email"
+                  value={user.email}
+                  type="email"
+                  className="form-control login-input"
+                  placeholder="Email Address"
+                  autofocus
+                />
+                <pre>{JSON.stringify(user.email, 2, null)}</pre>
+                <input
+                  onChange={handleChange}
+                  value={user.password}
+                  name="password"
+                  type="password"
+                  className="form-control login-input"
+                  placeholder="Password"
+                />
+                <pre>{JSON.stringify(user.password, 2, null)}</pre>
+
+                <input
+                  onChange={handleChange}
+                  value={user.fullname}
+                  name="fullname"
+                  type="text"
+                  className="form-control register-input"
+                  placeholder="Full Name"
+                />
+                <pre>{JSON.stringify(user.fullname, 2, null)}</pre>
+                <input
+                  onChange={handleChange}
+                  value={user.gender}
+                  name="gender"
+                  type="text"
+                  className="form-control register-input"
+                  placeholder="Gender"
+                />
+                <pre>{JSON.stringify(user.gender, 2, null)}</pre>
+                <input
+                  onChange={handleChange}
+                  value={user.phone}
+                  name="phone"
+                  type="text"
+                  className="form-control register-input"
+                  placeholder="Phone"
+                />
+                <pre>{JSON.stringify(user.phone, 2, null)}</pre>
+
+                <button
+                  className=" btn btn-lg login-btn"
+                  // onClick={LoginUser}
+                  type="submit"
+                >
+                  Register
+                </button>
+
+                <div className="mt-3">
+                  <label>
+                    Don't have an account? Click
+                    <span
+                      style={{ cursor: "pointer" }}
+                      variant="primary"
+                      onClick={() => {
+                        handleClose2();
+                        setShow(true);
+                      }}
+                    >
+                      Here
+                    </span>
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

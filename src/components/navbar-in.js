@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NavbarIn = () => {
   return (
     <Navbar id="nav" expand="lg" variant="dark">
-      <Navbar.Brand href="/" className="text-light" id="brand">
+      <Navbar.Brand as={Link} to="/" className="text-light" id="brand">
         <img src="./img/brand.svg" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
