@@ -218,3 +218,20 @@ p {
   background-color: #ffc700;
   color: black;
 }
+.attach {
+  background-color: #433434;
+  color: white;
+}
+.attach:hover {
+  background-color: #ffc700;
+  color: black;
+}
+
+.save {
+  background-color: #433434;
+  width: 20%;
+}
+.save:hover {
+  background-color: #ffc700;
+  color: black;
+}

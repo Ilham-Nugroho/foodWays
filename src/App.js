@@ -9,7 +9,9 @@ import HomeIn from "./pages/Home";
 import Menu from "./pages/Menu";
 import Detail from "./pages/Detail";
 import User from "./pages/User";
-import EditUser from "./pages/Edit-User";
+import EditUser from "./pages/User-Edit";
+import Partner from "./pages/Partner";
+import EditPartner from "./pages/Partner-Edit";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -24,6 +26,8 @@ function App() {
             <PrivateRoute exact path="/menu" component={Menu} />
             <PrivateRoute exact path="/user" component={User} />
             <PrivateRoute exact path="/user/edit" component={EditUser} />
+            <PrivateRoute exact path="/partner" component={Partner} />
+            <PrivateRoute exact path="/partner/edit" component={EditPartner} />
           </Switch>
         </div>
       </Router>
