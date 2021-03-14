@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar-in";
 
-const EditProfile = () => {
+const EditUser = () => {
   return (
     <div>
       <Navbar />
@@ -52,4 +52,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditUser;
