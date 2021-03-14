@@ -35,7 +35,7 @@ const HomeIn = () => {
             <h1>Express Home Delivery</h1>
 
             <div className="content-desc">
-              <img src="./img/Rectangle 2.png" />
+              <img src="/img/Rectangle 2.png" />
               <p>
                 Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem
                 ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum
@@ -44,7 +44,7 @@ const HomeIn = () => {
             </div>
           </div>
           <div className="header-pizza">
-            <img src="./img/pizza.png" />
+            <img src="/img/pizza.png" />
           </div>
         </div>
       </div>
@@ -63,28 +63,28 @@ const HomeIn = () => {
               }}
             >
               <div className="restaurant-card">
-                <img src="./img/burgerking.png" />
+                <img src="/img/burgerking.png" />
                 <h5>Burger King</h5>
               </div>
             </div>
 
             <div className="mt-2 col-lg-3 col-md-6 ">
               <div className="restaurant-card">
-                <img src="./img/starbucks.png" />
+                <img src="/img/starbucks.png" />
                 <h5>Starbucks</h5>
               </div>
             </div>
 
             <div className=" mt-2 col-lg-3 col-md-6 ">
               <div className="restaurant-card">
-                <img src="./img/kfc.png" />
+                <img src="/img/kfc.png" />
                 <h5>KFC</h5>
               </div>
             </div>
 
             <div className="mt-2 col-lg-3 col-md-6 ">
               <div className="restaurant-card">
-                <img src="./img/jco.png" />
+                <img src="/img/jco.png" />
                 <h5>JCo</h5>
               </div>
             </div>
@@ -98,7 +98,7 @@ const HomeIn = () => {
           <div className="row mt-3">
             <div className="col-lg-3 col-md-6">
               <div className="card">
-                <img src="./img/nasgor.png" />
+                <img src="/img/nasgor.png" />
                 <h6>Geprek Bensu</h6>
                 <p>0.2 KM</p>
               </div>
@@ -106,7 +106,7 @@ const HomeIn = () => {
 
             <div className=" col-lg-3 col-md-6">
               <div className="card">
-                <img src="./img/geprek.png" />
+                <img src="/img/geprek.png" />
                 <h6>Nasi Goreng</h6>
                 <p>0.6 KM</p>
               </div>
@@ -114,7 +114,7 @@ const HomeIn = () => {
 
             <div className="col-lg-3 col-md-6">
               <div className="card">
-                <img src="./img/pecel.png" />
+                <img src="/img/pecel.png" />
                 <h6>Pecel</h6>
                 <p>0.6 KM</p>
               </div>
@@ -122,7 +122,7 @@ const HomeIn = () => {
 
             <div className="col-lg-3 col-md-6">
               <div className="card">
-                <img src="./img/kopi.png" />
+                <img src="/img/kopi.png" />
                 <h6>Kopi Kenangan</h6>
                 <p>1.6 KM</p>
               </div>

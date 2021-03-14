@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar-in";
 
-const ProfileUser = () => {
+const EditProfile = () => {
   return (
     <div>
       <Navbar />
@@ -19,7 +19,7 @@ const ProfileUser = () => {
           </div>
           <div className="">
             <label className="btn btn-warning ">
-              Attach File <img src="./img/files.png" />{" "}
+              Attach File <img src="../img/files.png" />{" "}
               <input type="file" hidden />
             </label>
           </div>
@@ -52,4 +52,4 @@ const ProfileUser = () => {
   );
 };
 
-export default ProfileUser;
+export default EditProfile;

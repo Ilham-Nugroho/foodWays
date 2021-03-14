@@ -8,7 +8,8 @@ import { UserContextProvider } from "./context/userContext";
 import HomeIn from "./pages/Home";
 import Menu from "./pages/Menu";
 import Detail from "./pages/Detail";
-import ProfileUser from "./pages/Profile-user";
+import User from "./pages/User";
+import EditProfile from "./pages/Edit-Profile";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -21,7 +22,8 @@ function App() {
             <Route exact path="/" component={HomeIn} />
             <PrivateRoute exact path="/menu/:id" component={Detail} />
             <PrivateRoute exact path="/menu" component={Menu} />
-            <PrivateRoute exact path="/profile" component={ProfileUser} />
+            <PrivateRoute exact path="/user" component={User} />
+            <PrivateRoute exact path="/user/edit" component={EditProfile} />
           </Switch>
         </div>
       </Router>

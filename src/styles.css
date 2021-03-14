@@ -13,6 +13,10 @@ h6 {
   font-family: "Abhaya Libre";
 }
 
+p {
+  margin-bottom: 0;
+}
+
 /* LOG IN & REGISTER */
 .text-center {
   display: flex;
@@ -162,12 +166,36 @@ h6 {
 }
 
 /* DETAIL */
+.menu-detail {
+  width: 50%;
+}
 
 /* PROFILE */
 .profile {
   background-color: #e5e5e5;
   height: 100vh;
-  padding: 73px 13% 0;
+  padding: 59px 13%;
+}
+.profile-content {
+  justify-content: space-evenly;
+}
+
+.profile-bio-data {
+  padding-left: 10px;
+}
+.profile-history {
+  width: 100%;
+}
+.history-transaction {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px;
+}
+.history-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .location-btn {
@@ -178,4 +206,15 @@ h6 {
 .location-btn:hover {
   color: black;
   background-color: #ffc700;
+}
+
+.edit-profile {
+  display: inline-block;
+  background-color: #433434;
+  color: #fff;
+  width: 100%;
+}
+.edit-profile:hover {
+  background-color: #ffc700;
+  color: black;
 }

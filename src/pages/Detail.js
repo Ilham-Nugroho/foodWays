@@ -29,8 +29,8 @@ const Detail = () => {
   return (
     <div>
       <Navbar />
-      <div className="products-all">
-        <div className="restaurant" style={{ height: "100vh" }}>
+      <div className="products-all justify-content-center d-flex mt-5">
+        <div className="menu-detail" style={{ height: "100vh" }}>
           {product && <CardMenu product={product} />}
         </div>
       </div>
