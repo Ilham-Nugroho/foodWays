@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar-in";
+
 import CardMenu from "../components/card-menu";
+import CardResto from "../components/card-resto";
+
 import { products } from "../components/data";
 
 const Menu = () => {
   const [productList] = useState(products);
+
+  const getMenuFromResto = productList.find((products) => products.id === 1)
+    .product;
 
   return (
     <div className="products-all">
@@ -16,9 +22,16 @@ const Menu = () => {
           </strong>
         </div>
         <div className="row mt-3">
-          {productList.map((product) => (
-            <div className="col-lg-3 col-md-6 mt-3" key={product.id}>
-              <CardMenu product={product} />
+          {getMenuFromResto.map((data) => (
+            <div className="col-lg-3 col-md-6 mt-3" key={data.id}>
+              <CardMenu product={data} />
+            </div>
+          ))}
+        </div>
+        <div className="row mt-3">
+          {productList.map((resto) => (
+            <div className="col-lg-3 col-md-6 mt-3" key={resto.id}>
+              <CardResto restaurant={resto} />
             </div>
           ))}
         </div>
