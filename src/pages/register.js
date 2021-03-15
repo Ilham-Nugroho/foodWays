@@ -47,7 +47,7 @@ function Register() {
             placeholder="Email Address"
             autofocus
           />
-          <pre>{JSON.stringify(user.email, 2, null)}</pre>
+
           <input
             onChange={handleChange}
             value={user.password}
@@ -56,7 +56,6 @@ function Register() {
             className="form-control login-input"
             placeholder="Password"
           />
-          <pre>{JSON.stringify(user.password, 2, null)}</pre>
 
           <input
             onChange={handleChange}
@@ -66,7 +65,6 @@ function Register() {
             className="form-control register-input"
             placeholder="Full Name"
           />
-          <pre>{JSON.stringify(user.fullname, 2, null)}</pre>
           <input
             onChange={handleChange}
             value={user.gender}
@@ -75,7 +73,6 @@ function Register() {
             className="form-control register-input"
             placeholder="Gender"
           />
-          <pre>{JSON.stringify(user.gender, 2, null)}</pre>
           <input
             onChange={handleChange}
             value={user.phone}
@@ -84,9 +81,13 @@ function Register() {
             className="form-control register-input"
             placeholder="Phone"
           />
-          <pre>{JSON.stringify(user.phone, 2, null)}</pre>
 
-          <button className=" btn btn-lg login-btn" type="submit">
+          <select className="form-control register-input" name="asWho">
+            <option value="user">As User</option>
+            <option value="partner">As Partner</option>
+          </select>
+
+          <button className=" btn btn-lg login-btn mt-4" type="submit">
             Register
           </button>
 

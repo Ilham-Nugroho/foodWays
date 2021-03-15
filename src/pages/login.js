@@ -64,10 +64,9 @@ function Login() {
             className="form-control login-input"
             placeholder="Password"
           />
-          <pre>{JSON.stringify(user, 2, null)}</pre>
 
           <button
-            className=" btn btn-lg login-btn"
+            className=" btn btn-lg login-btn mt-3"
             onClick={LoginUser}
             type="submit"
           >
@@ -97,7 +96,6 @@ function Login() {
           <Register />
         </Modal.Body>
       </Modal>
-      ;
     </div>
   );
 }

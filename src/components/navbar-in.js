@@ -5,16 +5,11 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
 
 import DropUser from "./drop-user";
+import DropPartner from "./drop-partner";
 
 const NavbarIn = () => {
   const test = <img src="/img/profil.png" />;
   const [state, dispatch] = useContext(CartContext);
-
-  // const apakah = () => {
-  //   {
-  //     state.carts.length > 1 ? "69" : "33";
-  //   }
-  // };
 
   return (
     <div>
@@ -37,6 +32,7 @@ const NavbarIn = () => {
             </Nav.Link>
             <NavDropdown title={test} id="nav-dropdown">
               <DropUser />
+              {/* <DropPartner /> */}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

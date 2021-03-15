@@ -15,10 +15,8 @@ import Partner from "./pages/Partner";
 import EditPartner from "./pages/Partner-Edit";
 import AddMenu from "./pages/AddMenu";
 import Cart from "./pages/Cart";
-import Map from "./components/mapBox";
 
 import PrivateRoute from "./components/PrivateRoute";
-import { createContext } from "react";
 
 function App() {
   return (
@@ -28,7 +26,7 @@ function App() {
           <div className="">
             <Switch>
               <Route exact path="/" component={HomeIn} />
-              <Route exact path="/map" component={Map} />
+
               <PrivateRoute exact path="/menu/:id" component={Detail} />
               <PrivateRoute exact path="/menu" component={Menu} />
               <PrivateRoute exact path="/user" component={User} />

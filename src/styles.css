@@ -129,7 +129,7 @@ p {
   display: flex;
 }
 .header-pizza img {
-  width: 35vw;
+  width: 30vw;
 }
 @media only screen and (max-width: 990px) {
   .header-pizza img {
@@ -234,7 +234,13 @@ p {
 }
 .attach {
   background-color: #433434;
+  height: 38px;
+  width: 165px;
+
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .attach:hover {
   background-color: #ffc700;
@@ -285,6 +291,8 @@ p {
 
 /* MAP */
 .map-container {
+  height: 800px;
+
   position: absolute;
   top: 0;
   right: 0;

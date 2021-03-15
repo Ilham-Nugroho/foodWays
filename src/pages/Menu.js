@@ -44,13 +44,6 @@ const Menu = () => {
             </div>
           ))}
         </div>
-        <div className="row mt-3">
-          {productList.map((resto) => (
-            <div className="col-lg-3 col-md-6 mt-3" key={resto.id}>
-              <CardResto restaurant={resto} />
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

@@ -94,7 +94,6 @@ const AddMenu = () => {
               Submit Product
             </button>
           </div>
-          <pre>{JSON.stringify(form, 2, null)}</pre>
         </form>
 
         <div className="mt-3 row">

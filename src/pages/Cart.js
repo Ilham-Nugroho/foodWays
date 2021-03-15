@@ -1,6 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Modal } from "react-bootstrap";
+
 import { CartContext } from "../context/cartContext";
 import Navbar from "../components/navbar-in";
+import Map from "../components/mapBox";
 
 const Cart = () => {
   const [state, dispatch] = useContext(CartContext);
@@ -32,6 +35,12 @@ const Cart = () => {
     });
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   return (
     <div>
       <Navbar />
@@ -45,7 +54,10 @@ const Cart = () => {
         </div>
         <div className="d-flex">
           <input className="form-control" style={{ height: "47px" }}></input>
-          <button className="location-btn btn btn-md">
+          <button
+            className="location-btn btn btn-md"
+            onClick={() => setShow(true)}
+          >
             Select On Map
             <img src="/img/map-icon.png" />
           </button>
@@ -122,7 +134,7 @@ const Cart = () => {
             </div>
             <div className="order-price-content mb-3 pb-1">
               <p>Ongkir</p>
-              <p style={{ color: "red" }}>10000</p>
+              <p style={{ color: "red" }}></p>
             </div>
 
             <hr style={{ borderTop: "solid" }} className="mt-3  mb-4" />
@@ -135,6 +147,17 @@ const Cart = () => {
         </div>
         <button>See How Far?</button>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        style={{ height: "600px" }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <Map />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

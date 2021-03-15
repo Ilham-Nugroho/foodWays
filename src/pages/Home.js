@@ -94,7 +94,12 @@ const HomeIn = () => {
           <div>
             <h3>Restaurant Near You</h3>
           </div>
-          <div className="row mt-3">
+          <div
+            className="row mt-3"
+            onClick={() => {
+              state.isLogin ? router.push("/menu") : setShow(true);
+            }}
+          >
             <div className="col-lg-3 col-md-6">
               <div className="card">
                 <img src="/img/nasgor.png" />
@@ -135,13 +140,6 @@ const HomeIn = () => {
           <Login />
         </Modal.Body>
       </Modal>
-
-      {/* <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <Register />
-        </Modal.Body>
-      </Modal> */}
     </div>
   );
 };

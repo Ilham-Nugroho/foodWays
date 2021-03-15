@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { UserContext } from "../context/userContext";
 
-const DropUser = () => {
+const DropPartner = () => {
   const [state, dispatch] = useContext(UserContext);
 
   const LogoutUser = () => {
@@ -20,11 +20,23 @@ const DropUser = () => {
         className="nav-dropdown d-flex justify-content-start"
       >
         <img
-          className="pr-4"
+          className="pr-3"
           src="/img/profilelogo.png"
           style={{ height: "30px" }}
         />{" "}
         Profile
+      </NavDropdown.Item>
+      <NavDropdown.Item
+        as={Link}
+        to="/add-menu"
+        className="nav-dropdown d-flex justify-content-start"
+      >
+        <img
+          className="pr-3"
+          src="/img/addproductlogo.png"
+          style={{ height: "30px" }}
+        />{" "}
+        Add Product
       </NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item
@@ -32,7 +44,7 @@ const DropUser = () => {
         onClick={LogoutUser}
       >
         <img
-          className="pr-4"
+          className="pr-3"
           src="/img/logoutlogo.png"
           style={{ height: "30px" }}
         />
@@ -42,4 +54,4 @@ const DropUser = () => {
   );
 };
 
-export default DropUser;
+export default DropPartner;

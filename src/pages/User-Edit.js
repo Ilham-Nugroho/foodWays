@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
+
 import Navbar from "../components/navbar-in";
+import Map from "../components/mapBox";
 
 const EditUser = () => {
   const [user, setUser] = useState({
@@ -17,6 +20,12 @@ const EditUser = () => {
     }));
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   return (
     <div>
       <Navbar />
@@ -24,7 +33,7 @@ const EditUser = () => {
       <div className="profile">
         <h2>Edit Profile</h2>
         <div className="d-flex justify-content-between mt-3">
-          <div style={{ width: "85%" }}>
+          <div style={{ width: "81%" }}>
             <input
               type="text"
               name="fullname"
@@ -35,9 +44,23 @@ const EditUser = () => {
             ></input>
           </div>
           <div className="">
-            <button className="btn btn-md attach">
-              Attach File <img src="/img/files.png" />{" "}
-              <input type="file" hidden />
+            <button
+              className="btn btn-sm attach"
+              style={{
+                backgroundColor: "#e5e5e5",
+                color: "black",
+                borderColor: "black",
+              }}
+            >
+              <label className="d-flex pt-2" style={{ fontSize: "15px" }}>
+                Attach File
+                <img
+                  className=" pl-2"
+                  src="/img/files.png"
+                  style={{ height: "20px" }}
+                />
+                <input type="file" hidden />
+              </label>
             </button>
           </div>
         </div>
@@ -68,13 +91,31 @@ const EditUser = () => {
             value={user.location}
             onChange={handleChange}
           ></input>
-          <button className="location-btn btn btn-md">Select On Map</button>
+          <button
+            className="location-btn btn btn-md"
+            onClick={() => {
+              setShow(true);
+            }}
+          >
+            Select On Map
+          </button>
         </div>
         <div className="justify-content-end d-flex ">
           <button className="btn btn-lg btn-primary mt-5 save">Save</button>
         </div>
-        <pre> {JSON.stringify(user, 2, null)}</pre>
       </div>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        style={{ height: "600px" }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <Map />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
