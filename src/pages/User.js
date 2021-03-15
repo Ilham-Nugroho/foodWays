@@ -46,7 +46,7 @@ const User = () => {
                 </div>
                 <div className="history-status">
                   <img src="/img/orderlogo.png" />
-                  <p>Finished </p>
+                  <img src="/img/finish.png" />
                 </div>
               </div>
             </div>

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-// import { CartContext } from "../contexts/cartContext";
 
 import Navbar from "../components/navbar-in";
 
@@ -7,7 +6,6 @@ import CardMenu from "../components/card-menu";
 import { products } from "../components/data";
 
 const AddMenu = () => {
-  // const [state, dispatch] = useContext(CartContext);
   const existedMenu = products.find((products) => products.id === 1).product;
 
   const [productsList, setProductsList] = useState(existedMenu);

@@ -29,7 +29,7 @@ function Login() {
       type: "LOGIN_SUCCESS",
     });
     handleClose();
-    router.push("/profile");
+    router.push("/");
   };
 
   const handleClose = () => {
