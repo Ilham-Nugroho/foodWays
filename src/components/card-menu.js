@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-const CardMenu = ({ product }) => {
+const CardMenu = ({ product, fromMenu }) => {
   const history = useHistory();
   const { id, menuImg, menuName, menuPrice } = product;
 
@@ -10,7 +10,11 @@ const CardMenu = ({ product }) => {
       <div
         className="card"
         onClick={() => {
-          history.push(`/menu/${id}`);
+          if (fromMenu) {
+            history.push(`/menu/${id}`);
+          } else {
+            return;
+          }
         }}
       >
         <img src={menuImg} />

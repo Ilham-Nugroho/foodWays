@@ -137,6 +137,10 @@ p {
 }
 
 /* MENU */
+.products-all {
+  background-color: #e5e5e5;
+}
+
 .order-btn {
   background-color: #ffc700;
   color: black;

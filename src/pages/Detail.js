@@ -24,12 +24,10 @@ const Detail = () => {
     setProduct(filterProduct);
   };
 
-  console.log(product);
-
   return (
-    <div>
+    <div className="products-all">
       <Navbar />
-      <div className="products-all justify-content-center d-flex mt-5">
+      <div className=" justify-content-center d-flex mt-5">
         <div className="menu-detail" style={{ height: "100vh" }}>
           {product && <CardMenu product={product} />}
         </div>

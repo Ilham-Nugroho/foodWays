@@ -12,6 +12,7 @@ import User from "./pages/User";
 import EditUser from "./pages/User-Edit";
 import Partner from "./pages/Partner";
 import EditPartner from "./pages/Partner-Edit";
+import AddMenu from "./pages/AddMenu";
 
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -28,6 +29,7 @@ function App() {
             <PrivateRoute exact path="/user/edit" component={EditUser} />
             <PrivateRoute exact path="/partner" component={Partner} />
             <PrivateRoute exact path="/partner/edit" component={EditPartner} />
+            <PrivateRoute exact path="/add-menu" component={AddMenu} />
           </Switch>
         </div>
       </Router>

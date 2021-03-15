@@ -23,8 +23,8 @@ const Menu = () => {
         </div>
         <div className="row mt-3">
           {getMenuFromResto.map((data) => (
-            <div className="col-lg-3 col-md-6 mt-3" key={data.id}>
-              <CardMenu product={data} />
+            <div className="col-lg-3 col-md-6 mt-3">
+              <CardMenu product={data} key={data.id} fromMenu={true} />
             </div>
           ))}
         </div>
