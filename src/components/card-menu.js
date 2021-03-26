@@ -18,11 +18,15 @@ const CardMenu = ({ product, fromMenu, addOrder }) => {
             }
           }}
         />
-        <div style={{ height: "50px" }}>
-          <h5>{menuName}</h5>
+        <div style={{ height: "50px" }} className="d-flex align-items-center ">
+          <h5 className="pt-1 " style={{ fontWeight: "800", fontSize: "18px" }}>
+            {menuName}
+          </h5>
         </div>
 
-        <p>{menuPrice}</p>
+        <p className=" pb-2 " style={{ color: "#FF1515" }}>
+          Rp. {menuPrice}
+        </p>
         <button
           onClick={() => addOrder(product)}
           className="btn btn-md order-btn"

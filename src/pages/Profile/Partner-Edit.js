@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar-in";
+import Navbar from "../../components/navbar-in";
 
 const EditPartner = () => {
   const [partner, setPartner] = useState({
@@ -35,7 +35,7 @@ const EditPartner = () => {
             ></input>
           </div>
           <div className="">
-            <button className="btn btn-md attach">
+            <button className="btn btn-md attach form-control">
               Attach File <img src="/img/files.png" />{" "}
               <input type="file" hidden />
             </button>

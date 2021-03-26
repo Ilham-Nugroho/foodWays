@@ -5,7 +5,6 @@ export const CartContext = createContext();
 const initialState = {
   isLogin: false,
   carts: [],
-  currentRestaurant: "kfc",
 };
 
 const reducer = (state, action) => {

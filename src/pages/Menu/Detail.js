@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../components/data";
-import CardMenu from "../components/card-menu";
+import { products } from "../../components/data";
+import CardMenu from "../../components/card-menu";
 
-import Navbar from "../components/navbar-in";
+import Navbar from "../../components/navbar-in";
 
 const Detail = () => {
   const [productList] = useState(products);

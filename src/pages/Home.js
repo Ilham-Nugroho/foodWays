@@ -8,7 +8,7 @@ import { UserContext } from "../context/userContext";
 import Login from "./Login";
 import NavbarIn from "../components/navbar-in";
 import NavbarOut from "../components/navbar-out";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 
 const HomeIn = () => {
   const router = useHistory();
@@ -16,24 +16,22 @@ const HomeIn = () => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-  };
-
-  const handleClose2 = () => {
-    setShow2(false);
-  };
-
   return (
     <div>
       {state.isLogin ? <NavbarIn /> : <NavbarOut />}
       <div className="home-header">
         <div className="header-title">
-          <div className="title-content">
-            <h1>Are You Hungry?</h1>
-            <h1>Express Home Delivery</h1>
+          <div className="">
+            <div>
+              <h1 style={{ fontSize: "55px", fontWeight: "800" }}>
+                Are You Hungry?
+              </h1>
+              <h1 style={{ fontSize: "55px", fontWeight: "800" }}>
+                Express Home Delivery
+              </h1>
+            </div>
 
-            <div className="content-desc">
+            <div className="content-desc mb-3">
               <img src="/img/Rectangle 2.png" />
               <p>
                 Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem
@@ -51,7 +49,7 @@ const HomeIn = () => {
       <div className="home-content">
         <div className="restaurant">
           <div className="">
-            <h3>Popular Restaurant</h3>
+            <h3 style={{ fontWeight: "800" }}>Popular Restaurant</h3>
           </div>
 
           <div className="row mt-2">
@@ -92,7 +90,7 @@ const HomeIn = () => {
 
         <div className="restaurant">
           <div>
-            <h3>Restaurant Near You</h3>
+            <h3 style={{ fontWeight: "800" }}>Restaurant Near You</h3>
           </div>
           <div
             className="row mt-3"
@@ -134,12 +132,6 @@ const HomeIn = () => {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <Login />
-        </Modal.Body>
-      </Modal>
     </div>
   );
 };

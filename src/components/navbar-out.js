@@ -7,6 +7,8 @@ import { Modal } from "react-bootstrap";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
+import { API } from "../config/api";
+
 const NavbarComponent = () => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -52,13 +54,13 @@ const NavbarComponent = () => {
         </Navbar.Collapse>
       </Navbar>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton></Modal.Header>
+        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <Login />
         </Modal.Body>
       </Modal>
       <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton></Modal.Header>
+        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <Register />
         </Modal.Body>

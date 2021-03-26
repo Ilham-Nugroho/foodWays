@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar-in";
+import Navbar from "../../components/navbar-in";
 
-import CardMenu from "../components/card-menu";
-import CardResto from "../components/card-resto";
+import CardMenu from "../../components/card-menu";
+import CardResto from "../../components/card-resto";
 
 import { useContext } from "react";
-import { CartContext } from "../context/cartContext";
+import { CartContext } from "../../context/cartContext";
 
-import { products } from "../components/data";
+import { products } from "../../components/data";
 
 const Menu = () => {
   const [productList] = useState(products);
@@ -29,7 +29,9 @@ const Menu = () => {
       <div className="restaurant">
         <div>
           <strong>
-            <h3>Geprek Bensu, Menus</h3>
+            <h3 style={{ fontSize: "36px", fontWeight: "800" }}>
+              Geprek Bensu, Menus
+            </h3>
           </strong>
         </div>
         <div className="row mt-3">

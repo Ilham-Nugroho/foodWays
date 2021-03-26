@@ -145,7 +145,18 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <button>See How Far?</button>
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn btn-lg mt-3"
+            style={{
+              backgroundColor: "#433434",
+              width: "180px",
+              color: "white",
+            }}
+          >
+            See How Far?
+          </button>
+        </div>
       </div>
       <Modal
         show={show}

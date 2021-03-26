@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 
-import Navbar from "../components/navbar-in";
+import Navbar from "../../components/navbar-in";
 
-import CardMenu from "../components/card-menu";
-import { products } from "../components/data";
+import CardMenu from "../../components/card-menu";
+import { products } from "../../components/data";
 
 const AddMenu = () => {
   const existedMenu = products.find((products) => products.id === 1).product;

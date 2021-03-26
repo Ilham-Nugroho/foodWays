@@ -1,4 +1,4 @@
-/* CUSTOM */
+/*------------------------------------- CUSTOM */
 @font-face {
   src: url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap");
   font-family: "Abhaya Libre";
@@ -17,7 +17,7 @@ p {
   margin-bottom: 0;
 }
 
-/* LOG IN & REGISTER */
+/*------------------------------------- LOG IN & REGISTER */
 .text-center {
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@ p {
   margin-bottom: 2%;
 }
 
-/* NAVBAR */
+/*--------------------------------------- NAVBAR */
 #nav-dropdrown {
   width: 700px;
 }
@@ -85,7 +85,7 @@ p {
   border-color: #fff;
   border-width: 2px;
 }
-/* HOME */
+/*----------------------------------------- HOME */
 .home-header {
   min-height: 500px;
   background-color: #ffc700;
@@ -93,7 +93,7 @@ p {
 
 .header-title {
   display: flex;
-  padding: 64px 15% 40px 15%;
+  padding: 64px 13% 40px 13%;
 }
 
 @media only screen and (max-width: 990px) {
@@ -130,6 +130,7 @@ p {
 }
 .header-pizza img {
   width: 30vw;
+  height: auto;
 }
 @media only screen and (max-width: 990px) {
   .header-pizza img {
@@ -141,7 +142,7 @@ p {
   background-color: #e5e5e5;
 }
 
-/* MENU */
+/*-------------------------------------- MENU */
 .products-all {
   background-color: #e5e5e5;
 }
@@ -171,29 +172,31 @@ p {
 
 .card {
   padding: 10px 10px;
+  margin-bottom: 10px;
   width: 100%;
+  border-radius: 5px;
 }
 
-/* DETAIL */
+/*--------------------------------- DETAIL */
 .menu-detail {
   width: 50%;
 }
 
-/* PROFILE */
+/*------------------------------- PROFILE */
 .profile {
   background-color: #e5e5e5;
   height: 100vh;
   padding: 59px 13%;
 }
 .profile-content {
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .profile-bio-data {
   padding-left: 10px;
 }
 .profile-history {
-  width: 100%;
+  width: 35vw;
 }
 .history-transaction {
   display: flex;
@@ -256,7 +259,13 @@ p {
   color: black;
 }
 
-/* CART */
+.table thead tr th,
+.table tbody tr td {
+  border: 2px solid #828282;
+  text-align: center;
+}
+
+/*---------------------------------------- CART */
 
 .order-menu {
   width: 100%;
@@ -311,4 +320,11 @@ p {
   left: 0;
   margin: 12px;
   border-radius: 4px;
+}
+
+.form-control {
+  border-radius: 5px;
+  background-color: #d2d2d2ab;
+  border: 2px solid #766c6c;
+  height: 50px;
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-import Navbar from "../components/navbar-in";
-import Map from "../components/mapBox";
+import Navbar from "../../components/navbar-in";
+import Map from "../../components/mapBox";
 
 const EditUser = () => {
   const [user, setUser] = useState({

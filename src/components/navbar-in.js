@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 import { CartContext } from "../context/cartContext";
 
-import DropUser from "./drop-user";
-import DropPartner from "./drop-partner";
+import DropUser from "./dropDown-user";
+import DropPartner from "./dropDown-partner";
 
 const NavbarIn = () => {
   const test = <img src="/img/profil.png" />;

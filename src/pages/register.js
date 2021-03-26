@@ -109,7 +109,7 @@ function Register() {
         </form>
       </div>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton></Modal.Header>
+        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <Login />
         </Modal.Body>

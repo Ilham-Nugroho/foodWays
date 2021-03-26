@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<!-- {posts.map((data) => {
+            <tr>
+              <td>{data.id}</td>
+              <td>{data.name}</td>
+              <td>{data.address}</td>
+              <td>{data.order}</td>
+              <td>{data.status}</td>
+              <td>{data.action}</td>
+            </tr>;
+          })} -->
+
 ## Available Scripts
 
 In the project directory, you can run:
