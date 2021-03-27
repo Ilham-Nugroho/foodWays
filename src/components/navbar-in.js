@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { Navbar, Nav, NavDropdown, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { CartContext } from "../context/cartContext";
+import { API, setAuthToken } from "../config/api";
+
+import { CartContext, UserContext } from "../context/cartContext";
 
 import DropUser from "./dropDown-user";
 import DropPartner from "./dropDown-partner";

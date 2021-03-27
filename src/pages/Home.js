@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 
 import { UserContext } from "../context/userContext";
 
-import Login from "./Login";
+import Login from "./login";
 import NavbarIn from "../components/navbar-in";
 import NavbarOut from "../components/navbar-out";
 import Menu from "./Menu/Menu";

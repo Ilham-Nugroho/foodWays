@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
+import { useQuery, useMutation } from "react-query";
+
 import { UserContext } from "../context/userContext";
 import { Modal, Button } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 
 import { API, setAuthToken } from "../config/api";
-import Register from "./Register";
+import Register from "./register";
 
 function Login() {
   const router = useHistory();
@@ -12,16 +14,16 @@ function Login() {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
-  const [user, setUser] = useState({
+  const [form, setForm] = useState({
     email: "kfc@gmail.com",
     password: "kfc123",
   });
 
-  const { email, password } = user;
+  const { email, password } = form;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setUser((prevState) => ({
+    setForm((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -39,35 +41,41 @@ function Login() {
     setShow2(false);
   };
 
+  // {registerProfile.error?.response?.data && (
+  //   <div class="alert alert-danger" role="alert">
+  //     {registerProfile.error?.response?.data.message}
+  //   </div>
+  // )}
+
+  const login = useMutation(async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({
+      email,
+      password,
+    });
+
+    const response = await API.post("/login", body, config);
+    console.log(response.data);
+    // console.log(response.data.data.profile);
+
+    dispatch({
+      type: "LOGIN_SUCCESS",
+      payload: response.data.data.profile,
+    });
+
+    setAuthToken(response.data.data.profile.token);
+    router.push("/");
+  });
+
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const body = JSON.stringify({
-        email,
-        password,
-      });
-
-      const response = await API.post("/login", body, config);
-      console.log(response.data);
-      console.log(response.data.data.profile);
-
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: response.data.data.profile,
-      });
-
-      setAuthToken(response.data.data.profile.token);
-      router.push("/");
-    } catch (err) {
-      console.log(err);
-    }
+    login.mutate();
   };
 
   return (
@@ -75,6 +83,12 @@ function Login() {
       <div className="form-signin">
         <form onSubmit={onSubmit}>
           <h1 className="login-h1">Log In</h1>
+
+          {login.error?.response?.data && (
+            <div class="alert alert-danger" role="alert">
+              {login.error?.response?.data?.message}
+            </div>
+          )}
 
           <input
             onChange={handleChange}
@@ -94,7 +108,7 @@ function Login() {
             className="form-control login-input"
             placeholder="Password"
           />
-          <pre>{JSON.stringify(user, null, 2)}</pre>
+          <pre>{JSON.stringify(form, null, 2)}</pre>
 
           <button
             className=" btn btn-lg login-btn mt-3"

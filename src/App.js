@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
@@ -61,26 +62,34 @@ function App() {
     checkUser();
   }, []);
 
-  return (
-    <CartContextProvider>
-      <Router>
-        <div className="">
-          <Switch>
-            <Route exact path="/" component={HomeIn} />
-            <Route exact path="/transaction" component={Transaction} />
+  const client = new QueryClient();
 
-            <PrivateRoute exact path="/menu/:id" component={Detail} />
-            <PrivateRoute exact path="/menu" component={Menu} />
-            <PrivateRoute exact path="/user" component={User} />
-            <PrivateRoute exact path="/user/edit" component={EditUser} />
-            <PrivateRoute exact path="/partner" component={Partner} />
-            <PrivateRoute exact path="/cart" component={Cart} />
-            <PrivateRoute exact path="/partner/edit" component={EditPartner} />
-            <PrivateRoute exact path="/add-menu" component={AddMenu} />
-          </Switch>
-        </div>
-      </Router>
-    </CartContextProvider>
+  return (
+    <QueryClientProvider client={client}>
+      <CartContextProvider>
+        <Router>
+          <div className="">
+            <Switch>
+              <Route exact path="/" component={HomeIn} />
+              <Route exact path="/transaction" component={Transaction} />
+
+              <PrivateRoute exact path="/menu/:id" component={Detail} />
+              <PrivateRoute exact path="/menu" component={Menu} />
+              <PrivateRoute exact path="/user" component={User} />
+              <PrivateRoute exact path="/user/edit" component={EditUser} />
+              <PrivateRoute exact path="/partner" component={Partner} />
+              <PrivateRoute exact path="/cart" component={Cart} />
+              <PrivateRoute
+                exact
+                path="/partner/edit"
+                component={EditPartner}
+              />
+              <PrivateRoute exact path="/add-menu" component={AddMenu} />
+            </Switch>
+          </div>
+        </Router>
+      </CartContextProvider>
+    </QueryClientProvider>
   );
 }
 

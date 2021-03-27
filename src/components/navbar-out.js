@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import { Modal } from "react-bootstrap";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/login";
+import Register from "../pages/register";
 
 import { API } from "../config/api";
 

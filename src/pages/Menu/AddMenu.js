@@ -1,23 +1,67 @@
 import React, { useState, useContext } from "react";
+import { useQuery, useMutation } from "react-query";
+
+import { UserContext } from "../../context/userContext";
 
 import Navbar from "../../components/navbar-in";
-
 import CardMenu from "../../components/card-menu";
 import { products } from "../../components/data";
 
-const AddMenu = () => {
-  const existedMenu = products.find((products) => products.id === 1).product;
+import { API, setAuthToken } from "../../config/api";
 
+const AddMenu = () => {
+  const [state, dispatch] = useContext(UserContext);
+
+  const existedMenu = products.find((products) => products.id === 1).product;
   const [productsList, setProductsList] = useState(existedMenu);
 
+  console.log(localStorage.token);
+
   const [form, setForm] = useState({
-    name: "",
-    price: "",
-    imgURL: null,
+    menuName: "",
+    menuPrice: "",
+    menuImg: null,
   });
 
-  const { name, price, imgURL } = form;
+  const { menuName, menuPrice, menuImg } = form;
 
+  //-------------------------------------------------------
+  const { data: ProfileData, loading, error, refetch } = useQuery(
+    "menuCache",
+    async () => {
+      const response = await API.get("/products");
+      console.log(response);
+
+      const responseProducts = response.data.data.products;
+
+      return responseProducts;
+    }
+  );
+
+  const addProduct = useMutation(async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify({
+        menuName,
+        menuPrice,
+        menuImg,
+      });
+
+      await API.post("/product", body, config);
+      refetch();
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  //-------------------------------------------------------
+
+  //------COBA UPLOAD FILE------------------------
   const onChange = (event) => {
     const updateForm = { ...form };
     updateForm[event.target.name] =
@@ -32,18 +76,18 @@ const AddMenu = () => {
       ...productsList,
       {
         id: Math.round(Math.random() * 100),
-        menuName: name,
-        menuPrice: price,
-        menuImg: imgURL,
+        menuName: menuName,
+        menuPrice: menuPrice,
+        menuImg: menuImg,
       },
     ];
 
     setProductsList(newProducts);
 
     setForm({
-      name: "",
-      price: "",
-      imgUrl: null,
+      menuName: "",
+      menuPrice: "",
+      menuImg: null,
     });
   };
 
@@ -56,9 +100,9 @@ const AddMenu = () => {
           <div className="form-group">
             <label>Product Name</label>
             <input
-              value={name}
+              value={menuName}
               onChange={(event) => onChange(event)}
-              name="name"
+              name="menuName"
               type="text"
               className="form-control"
             />
@@ -66,9 +110,9 @@ const AddMenu = () => {
           <div className="form-group">
             <label>Product Price</label>
             <input
-              value={price}
+              value={menuPrice}
               onChange={(event) => onChange(event)}
-              name="price"
+              name="menuPrice"
               type="text"
               className="form-control"
             />
@@ -79,8 +123,8 @@ const AddMenu = () => {
               <input
                 type="file"
                 onChange={(event) => onChange(event)}
-                name="imgUrl"
-                value={imgURL}
+                name="menuImg"
+                value={menuImg}
                 className="custom-file-input"
                 id="customFile"
               />

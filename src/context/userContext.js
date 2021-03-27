@@ -32,7 +32,7 @@ const reducer = (state, action) => {
     //   };
     case "AUTH_ERROR":
     case "LOGOUT":
-      localStorage.setItem("token", payload);
+      localStorage.removeItem("token");
       return {
         ...state,
         isLogin: false,
