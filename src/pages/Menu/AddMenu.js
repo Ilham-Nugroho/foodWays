@@ -12,10 +12,8 @@ import { API, setAuthToken } from "../../config/api";
 const AddMenu = () => {
   const [state, dispatch] = useContext(UserContext);
 
-  const existedMenu = products.find((products) => products.id === 1).product;
-  const [productsList, setProductsList] = useState(existedMenu);
-
-  console.log(localStorage.token);
+  // const existedMenu = products.find((products) => products.id === 1).product;
+  // const [productsList, setProductsList] = useState(existedMenu);
 
   const [form, setForm] = useState({
     menuName: "",
@@ -26,63 +24,66 @@ const AddMenu = () => {
   const { menuName, menuPrice, menuImg } = form;
 
   //-------------------------------------------------------
-  const { data: ProfileData, loading, error, refetch } = useQuery(
-    "menuCache",
-    async () => {
-      const response = await API.get("/products");
-      console.log(response);
-
-      const responseProducts = response.data.data.products;
-
-      return responseProducts;
-    }
-  );
+  const {
+    data: productData,
+    error: productError,
+    loading: productLoading,
+    refetch: productRefetch,
+  } = useQuery("productsCache", async () => {
+    return API.get("/products");
+    // console.log(response);
+  });
 
   const addProduct = useMutation(async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+    // try {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
 
-      const body = JSON.stringify({
-        menuName,
-        menuPrice,
-        menuImg,
-      });
+    const body = new FormData();
 
-      await API.post("/product", body, config);
-      refetch();
-    } catch (err) {
-      console.log(err);
-    }
+    body.append("menuName", menuName);
+    body.append("menuPrice", menuPrice);
+    body.append("imageFile", menuImg);
+
+    await API.post("/product", body, config);
+    productRefetch();
+    // }
+    // catch (err) {
+    //   console.log(err);
+    // }
   });
+
+  console.log(productData);
 
   //-------------------------------------------------------
 
   //------COBA UPLOAD FILE------------------------
   const onChange = (event) => {
-    const updateForm = { ...form };
-    updateForm[event.target.name] =
-      event.target.type === "file" ? "/img/geprek.png" : event.target.value;
-    setForm(updateForm);
+    const tempForm = { ...form };
+
+    tempForm[event.target.name] =
+      event.target.type === "file" ? event.target.files[0] : event.target.value;
+    setForm(tempForm);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newProducts = [
-      ...productsList,
-      {
-        id: Math.round(Math.random() * 100),
-        menuName: menuName,
-        menuPrice: menuPrice,
-        menuImg: menuImg,
-      },
-    ];
+    // const newProducts = [
+    //   ...productsList,
+    //   {
+    //     id: Math.round(Math.random() * 100),
+    //     menuName: menuName,
+    //     menuPrice: menuPrice,
+    //     menuImg: menuImg,
+    //   },
+    // ];
 
-    setProductsList(newProducts);
+    // setProductsList(newProducts);
+    addProduct.mutate();
 
     setForm({
       menuName: "",
@@ -124,16 +125,16 @@ const AddMenu = () => {
                 type="file"
                 onChange={(event) => onChange(event)}
                 name="menuImg"
-                value={menuImg}
-                className="custom-file-input"
-                id="customFile"
+                // className="custom-file-input"
+                className="form-control"
+                // id="customFile"
               />
-              <label className="custom-file-label" htmlFor="customFile">
+              {/* <label className="custom-file-label" htmlFor="customFile">
                 Choose file
-              </label>
+              </label> */}
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-group mt-5">
             <button className="btn btn-primary btn-block">
               Submit Product
             </button>
@@ -141,11 +142,19 @@ const AddMenu = () => {
         </form>
 
         <div className="mt-3 row">
-          {productsList.map((data) => (
-            <div className="col-lg-3 col-md-6 mt-3">
-              <CardMenu product={data} key={data.id} fromMenu={true} />
-            </div>
-          ))}
+          {productLoading ? (
+            <h1>loading data</h1>
+          ) : (
+            productData?.data?.data?.products?.map((data) => (
+              <div className="col-lg-3 col-md-6 mt-3">
+                <CardMenu
+                  product={data}
+                  key={data.id}
+                  // fromMenu={true}
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

@@ -27,12 +27,14 @@ const CardMenu = ({ product, fromMenu, addOrder }) => {
         <p className=" pb-2 " style={{ color: "#FF1515" }}>
           Rp. {menuPrice}
         </p>
-        <button
-          onClick={() => addOrder(product)}
-          className="btn btn-md order-btn"
-        >
-          Order
-        </button>
+        {fromMenu && (
+          <button
+            onClick={() => addOrder(product)}
+            className="btn btn-md order-btn"
+          >
+            Order
+          </button>
+        )}
       </div>
     </div>
   );
