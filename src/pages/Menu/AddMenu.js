@@ -3,17 +3,17 @@ import { useQuery, useMutation } from "react-query";
 
 import { UserContext } from "../../context/userContext";
 
+import { useParams } from "react-router-dom";
+
 import Navbar from "../../components/navbar-in";
 import CardMenu from "../../components/card-menu";
-import { products } from "../../components/data";
 
 import { API, setAuthToken } from "../../config/api";
 
 const AddMenu = () => {
   const [state, dispatch] = useContext(UserContext);
-
-  // const existedMenu = products.find((products) => products.id === 1).product;
-  // const [productsList, setProductsList] = useState(existedMenu);
+  const { id } = useParams();
+  const [idForUpdate, setIdForUpdate] = useState(false);
 
   const [form, setForm] = useState({
     menuName: "",
@@ -23,17 +23,19 @@ const AddMenu = () => {
 
   const { menuName, menuPrice, menuImg } = form;
 
-  //-------------------------------------------------------
+  //-------------------------------------------------------------------------------
   const {
     data: productData,
     error: productError,
     loading: productLoading,
     refetch: productRefetch,
-  } = useQuery("productsCache", async () => {
-    return API.get("/products");
-    // console.log(response);
+  } = useQuery("productCache", async () => {
+    return API.get(`/products/`);
   });
 
+  console.log(productData);
+
+  //------------------------------- ADD PRODUCT ------------------------------------
   const addProduct = useMutation(async () => {
     // try {
     const config = {
@@ -50,17 +52,51 @@ const AddMenu = () => {
 
     await API.post("/product", body, config);
     productRefetch();
-    // }
-    // catch (err) {
-    //   console.log(err);
-    // }
   });
 
-  console.log(productData);
+  //-------------------------- UPDATE PRODUCT ------------------------------------
+  const updateProduct = useMutation(async () => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
 
-  //-------------------------------------------------------
+    const body = new FormData();
 
-  //------COBA UPLOAD FILE------------------------
+    body.append("menuName", menuName);
+    body.append("menuPrice", menuPrice);
+    body.append("imageFile", menuImg);
+
+    await API.patch(`/product/${idForUpdate}`, body, config);
+    productRefetch();
+  });
+
+  //------------------------- DELETE PRODUCT ------------------------------------
+  const deleteProduct = useMutation(async (id) => {
+    await API.delete(`/product/${id}`);
+    productRefetch();
+  });
+
+  const deleteProductById = async (id) => {
+    deleteProduct.mutate(id);
+  };
+
+  //------------------ SET STATE FOR UPDATE PRODUCT -----------------------------
+  const getProductById = async (id) => {
+    const response = await API.get(`/product/${id}`);
+    const editedProduct = response.data.data.product;
+
+    // const productString = JSON.stringify();
+    setIdForUpdate(editedProduct.id);
+    setForm({
+      menuName: editedProduct.menuName,
+      menuPrice: editedProduct.menuPrice,
+      menuImg: editedProduct.menuImg,
+    });
+  };
+
+  //--------------------------- FORM RELATED ------------------------------------
   const onChange = (event) => {
     const tempForm = { ...form };
 
@@ -72,18 +108,7 @@ const AddMenu = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // const newProducts = [
-    //   ...productsList,
-    //   {
-    //     id: Math.round(Math.random() * 100),
-    //     menuName: menuName,
-    //     menuPrice: menuPrice,
-    //     menuImg: menuImg,
-    //   },
-    // ];
-
-    // setProductsList(newProducts);
-    addProduct.mutate();
+    idForUpdate ? updateProduct.mutate() : addProduct.mutate();
 
     setForm({
       menuName: "",
@@ -97,46 +122,59 @@ const AddMenu = () => {
       <Navbar />
       <div className=" restaurant">
         <form onSubmit={(event) => handleSubmit(event)}>
-          <h3 className="text-center">Form Add Product</h3>
+          <h3
+            className="text-center mb-3"
+            style={{ fontWeight: "800", fontSize: "36px" }}
+          >
+            Form Add Product
+          </h3>
+          {addProduct?.error?.response?.data && (
+            <div class="alert alert-danger" role="alert">
+              {addProduct?.error?.response?.data?.message}
+            </div>
+          )}
           <div className="form-group">
-            <label>Product Name</label>
+            <label style={{ fontWeight: "600", fontSize: "18px" }}>
+              Product Name
+            </label>
             <input
               value={menuName}
               onChange={(event) => onChange(event)}
               name="menuName"
               type="text"
               className="form-control"
+              placeholder="Menu Name"
             />
           </div>
           <div className="form-group">
-            <label>Product Price</label>
+            <label style={{ fontWeight: "600", fontSize: "18px" }}>
+              Product Price
+            </label>
             <input
               value={menuPrice}
               onChange={(event) => onChange(event)}
               name="menuPrice"
               type="text"
               className="form-control"
+              placeholder="Menu Price"
             />
           </div>
           <div className="form-group">
-            <label>Product Image</label>
+            <label style={{ fontWeight: "600", fontSize: "18px" }}>
+              Product Image
+            </label>
             <div className="custom-file">
               <input
                 type="file"
                 onChange={(event) => onChange(event)}
                 name="menuImg"
-                // className="custom-file-input"
                 className="form-control"
-                // id="customFile"
               />
-              {/* <label className="custom-file-label" htmlFor="customFile">
-                Choose file
-              </label> */}
             </div>
           </div>
           <div className="form-group mt-5">
             <button className="btn btn-primary btn-block">
-              Submit Product
+              {idForUpdate ? "Update Product" : "Submit Product"}
             </button>
           </div>
         </form>
@@ -150,8 +188,15 @@ const AddMenu = () => {
                 <CardMenu
                   product={data}
                   key={data.id}
-                  // fromMenu={true}
+                  fromEdit={true}
+                  deleteProductById={deleteProductById}
+                  getProductById={getProductById}
                 />
+                {deleteProduct?.error?.response?.data && (
+                  <div class="alert alert-danger" role="alert">
+                    {deleteProduct?.error?.response?.data?.message}
+                  </div>
+                )}
               </div>
             ))
           )}

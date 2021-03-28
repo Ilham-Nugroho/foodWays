@@ -56,6 +56,16 @@ const Transaction = () => {
                 </td>
               </tr>
               <tr>
+                <td>1</td>
+                <td>Sugeng No Pants</td>
+                <td>Cilengsi</td>
+                <td>Paket Geprek</td>
+                <td>Waiting Approve</td>
+                <td className="tb-action ">
+                  <img style={{ marginRight: "10px" }} />
+                </td>
+              </tr>
+              <tr>
                 <td>2</td>
                 <td>Haris Gams</td>
                 <td>Serang</td>

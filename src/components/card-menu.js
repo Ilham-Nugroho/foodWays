@@ -1,7 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-const CardMenu = ({ product, fromMenu, addOrder }) => {
+const CardMenu = ({
+  product,
+  fromMenu,
+  addOrder,
+  fromEdit,
+  deleteProductById,
+  getProductById,
+}) => {
   const history = useHistory();
   const { id, menuImg, menuName, menuPrice } = product;
 
@@ -33,6 +40,22 @@ const CardMenu = ({ product, fromMenu, addOrder }) => {
             className="btn btn-md order-btn"
           >
             Order
+          </button>
+        )}
+        {fromEdit && (
+          <button
+            onClick={() => deleteProductById(id)}
+            className="btn btn-md order-btn mt-3"
+          >
+            Delete
+          </button>
+        )}
+        {fromEdit && (
+          <button
+            onClick={() => getProductById(id)}
+            className="btn btn-md order-btn mt-3"
+          >
+            Update
           </button>
         )}
       </div>

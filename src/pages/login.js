@@ -60,8 +60,7 @@ function Login() {
     });
 
     const response = await API.post("/login", body, config);
-    console.log(response.data);
-    // console.log(response.data.data.profile);
+    // console.log(response.data);
 
     dispatch({
       type: "LOGIN_SUCCESS",
