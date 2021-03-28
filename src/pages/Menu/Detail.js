@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../../components/data";
-import CardMenu from "../../components/card-menu";
+import CardMenu from "../../components/restaurant/card-menu";
 
 import Navbar from "../../components/navbar-in";
 

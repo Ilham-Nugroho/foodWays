@@ -5,6 +5,7 @@ export const CartContext = createContext();
 const initialState = {
   isLogin: false,
   carts: [],
+  partnerId: null,
 };
 
 const reducer = (state, action) => {

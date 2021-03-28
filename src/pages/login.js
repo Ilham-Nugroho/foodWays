@@ -15,7 +15,7 @@ function Login() {
   const [show2, setShow2] = useState(false);
 
   const [form, setForm] = useState({
-    email: "kfc@gmail.com",
+    email: "donut@gmail.com",
     password: "kfc123",
   });
 
@@ -60,7 +60,8 @@ function Login() {
     });
 
     const response = await API.post("/login", body, config);
-    // console.log(response.data);
+
+    console.log(response.data.data.profile.role);
 
     dispatch({
       type: "LOGIN_SUCCESS",

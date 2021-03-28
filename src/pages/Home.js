@@ -1,20 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import { Modal, Button } from "react-bootstrap";
-
 import { UserContext } from "../context/userContext";
 
-import Login from "./login";
+import { SectionPartner } from "../components/restaurant/section-partner";
+
 import NavbarIn from "../components/navbar-in";
 import NavbarOut from "../components/navbar-out";
-import Menu from "./Menu/Menu";
 
 const HomeIn = () => {
   const router = useHistory();
   const [state, dispatch] = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+
+  // console.log(user.role);
 
   return (
     <div>
@@ -89,10 +89,10 @@ const HomeIn = () => {
         </div>
 
         <div className="restaurant">
-          <div>
+          {/* <div>
             <h3 style={{ fontWeight: "800" }}>Restaurant Near You</h3>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="row mt-3"
             onClick={() => {
               state.isLogin ? router.push("/menu") : setShow(true);
@@ -129,6 +129,9 @@ const HomeIn = () => {
                 <p>1.6 KM</p>
               </div>
             </div>
+          </div> */}
+          <div>
+            <SectionPartner />
           </div>
         </div>
       </div>

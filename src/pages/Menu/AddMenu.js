@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useQuery, useMutation } from "react-query";
 
+import { Spinner } from "react-bootstrap";
+
 import { UserContext } from "../../context/userContext";
 
 import { useParams } from "react-router-dom";
 
 import Navbar from "../../components/navbar-in";
-import CardMenu from "../../components/card-menu";
+import CardMenu from "../../components/restaurant/card-menu";
 
 import { API, setAuthToken } from "../../config/api";
 
@@ -29,11 +31,11 @@ const AddMenu = () => {
     error: productError,
     loading: productLoading,
     refetch: productRefetch,
-  } = useQuery("productCache", async () => {
-    return API.get(`/products/`);
+  } = useQuery(["addProductCache", id], async () => {
+    return API.get(`/products/${id}`);
   });
 
-  console.log(productData);
+  // console.log(productData);
 
   //------------------------------- ADD PRODUCT ------------------------------------
   const addProduct = useMutation(async () => {
@@ -173,15 +175,22 @@ const AddMenu = () => {
             </div>
           </div>
           <div className="form-group mt-5">
-            <button className="btn btn-primary btn-block">
-              {idForUpdate ? "Update Product" : "Submit Product"}
+            <button
+              className="btn btn-primary btn-block order-btn"
+              style={{ height: "45px", border: "none" }}
+            >
+              <p style={{ fontWeight: "600", fontSize: "18px" }}>
+                {idForUpdate ? "Update Product" : "Submit Product"}
+              </p>
             </button>
           </div>
         </form>
 
         <div className="mt-3 row">
           {productLoading ? (
-            <h1>loading data</h1>
+            <Spinner animation="border" role="status" variant="warning">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
           ) : (
             productData?.data?.data?.products?.map((data) => (
               <div className="col-lg-3 col-md-6 mt-3">

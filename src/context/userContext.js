@@ -22,14 +22,17 @@ const reducer = (state, action) => {
         user: {
           email: payload.email,
           name: payload.name,
+          role: payload.role,
         },
         loading: false,
       };
-    // case "VALID_USER":
-    //   return {
-    //     ...state,
-    //     user: payload,
-    //   };
+
+    case "EDIT_PROFILE":
+      return {
+        ...state,
+        user: payload,
+      };
+
     case "AUTH_ERROR":
     case "LOGOUT":
       localStorage.removeItem("token");
