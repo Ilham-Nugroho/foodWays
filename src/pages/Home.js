@@ -8,13 +8,25 @@ import { SectionPartner } from "../components/restaurant/section-partner";
 import NavbarIn from "../components/navbar-in";
 import NavbarOut from "../components/navbar-out";
 
+import Login from "./login";
+
+import { Modal, Button } from "react-bootstrap";
+
 const HomeIn = () => {
   const router = useHistory();
   const [state, dispatch] = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
-  // console.log(user.role);
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const onClick = () => {
+    if (state.isLogin !== true) {
+      setShow(true);
+    }
+  };
 
   return (
     <div>
@@ -53,12 +65,7 @@ const HomeIn = () => {
           </div>
 
           <div className="row mt-2">
-            <div
-              className="mt-2 col-lg-3 col-md-6"
-              onClick={() => {
-                state.isLogin ? router.push("/menu") : setShow(true);
-              }}
-            >
+            <div className="mt-2 col-lg-3 col-md-6">
               <div className="restaurant-card">
                 <img src="/img/burgerking.png" />
                 <h5>Burger King</h5>
@@ -88,53 +95,17 @@ const HomeIn = () => {
           </div>
         </div>
 
-        <div className="restaurant">
-          {/* <div>
-            <h3 style={{ fontWeight: "800" }}>Restaurant Near You</h3>
-          </div> */}
-          {/* <div
-            className="row mt-3"
-            onClick={() => {
-              state.isLogin ? router.push("/menu") : setShow(true);
-            }}
-          >
-            <div className="col-lg-3 col-md-6">
-              <div className="card">
-                <img src="/img/nasgor.png" />
-                <h6>Geprek Bensu</h6>
-                <p>0.2 KM</p>
-              </div>
-            </div>
-
-            <div className=" col-lg-3 col-md-6">
-              <div className="card">
-                <img src="/img/geprek.png" />
-                <h6>Nasi Goreng</h6>
-                <p>0.6 KM</p>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-md-6">
-              <div className="card">
-                <img src="/img/pecel.png" />
-                <h6>Pecel</h6>
-                <p>0.6 KM</p>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-md-6">
-              <div className="card">
-                <img src="/img/kopi.png" />
-                <h6>Kopi Kenangan</h6>
-                <p>1.6 KM</p>
-              </div>
-            </div>
-          </div> */}
+        <div className="restaurant" onClick={onClick}>
           <div>
             <SectionPartner />
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <Login />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

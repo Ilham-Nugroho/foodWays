@@ -159,13 +159,14 @@ function Register() {
             <label>
               Don't have an account? Click
               <span
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: "blue" }}
                 variant="primary"
                 onClick={() => {
                   handleClose2();
                   setShow(true);
                 }}
               >
+                {" "}
                 Here
               </span>
             </label>
@@ -173,7 +174,6 @@ function Register() {
         </form>
       </div>
       <Modal show={show} onHide={handleClose}>
-        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <Login />
         </Modal.Body>

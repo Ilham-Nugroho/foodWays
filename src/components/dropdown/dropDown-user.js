@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 
 const DropUser = () => {
   const [state, dispatch] = useContext(UserContext);

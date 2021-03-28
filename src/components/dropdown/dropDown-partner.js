@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 
 const DropPartner = () => {
   const [state, dispatch] = useContext(UserContext);
@@ -28,7 +28,7 @@ const DropPartner = () => {
       </NavDropdown.Item>
       <NavDropdown.Item
         as={Link}
-        to="/add-menu"
+        to={`/${state.user.id}/add-menu`}
         className="nav-dropdown d-flex justify-content-start"
       >
         <img

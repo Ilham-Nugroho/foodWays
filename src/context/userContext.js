@@ -23,6 +23,7 @@ const reducer = (state, action) => {
           email: payload.email,
           name: payload.name,
           role: payload.role,
+          id: payload.id,
         },
         loading: false,
       };

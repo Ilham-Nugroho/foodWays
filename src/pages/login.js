@@ -108,7 +108,6 @@ function Login() {
             className="form-control login-input"
             placeholder="Password"
           />
-          <pre>{JSON.stringify(form, null, 2)}</pre>
 
           <button
             className=" btn btn-lg login-btn mt-3"
@@ -122,13 +121,14 @@ function Login() {
             <label>
               Don't have an account? Click
               <span
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: "blue" }}
                 variant="primary"
                 onClick={() => {
                   handleClose();
                   setShow2(true);
                 }}
               >
+                {" "}
                 Here
               </span>
             </label>
@@ -136,7 +136,6 @@ function Login() {
         </form>
       </div>
       <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Register />
         </Modal.Body>
