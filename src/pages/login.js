@@ -61,8 +61,6 @@ function Login() {
 
     const response = await API.post("/login", body, config);
 
-    console.log(response.data.data.profile.role);
-
     dispatch({
       type: "LOGIN_SUCCESS",
       payload: response.data.data.profile,

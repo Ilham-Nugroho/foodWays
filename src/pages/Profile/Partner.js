@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router";
+import { useQuery } from "react-query";
+import { Link, useParams } from "react-router-dom";
+
+import { API } from "../../config/api";
+
 import Navbar from "../../components/navbar-in";
-import { Link } from "react-router-dom";
+
+import { UserContext } from "../../context/userContext";
 
 const Partner = () => {
+  const [state, dispatch] = useContext(UserContext);
+  const { id } = useParams();
+  const history = useHistory();
+
+  if (state.user.id != id) {
+    history.push("/");
+  }
+
+  const {
+    data: profileData,
+    error: profileError,
+    loading: profileLoading,
+    refetch: profileRefetch,
+  } = useQuery(["profileCache", id], async () => {
+    return API.get(`/profile/${id}`);
+  });
+  // console.log(profileData?.data?.data?.profile);
+
   return (
     <div>
       <Navbar />
@@ -20,9 +45,12 @@ const Partner = () => {
             <div className="d-flex mt-3">
               <div>
                 <div>
-                  <img src="/img/bensu.png" />
+                  <img
+                    src={profileData?.data?.data?.profile.avatar}
+                    style={{ height: "300px", width: "250px" }}
+                  />
                 </div>
-                <Link to="/user/edit">
+                <Link to={`/partner/${state.user.id}/edit`}>
                   <button className="btn btn-md edit-profile mt-3">
                     Edit Profile
                   </button>
@@ -38,7 +66,7 @@ const Partner = () => {
                 >
                   Partner Name
                 </p>
-                <p>Geprek Bensu</p>
+                <p>{profileData?.data?.data?.profile.name}</p>
                 <br />
                 <p
                   style={{
@@ -49,7 +77,7 @@ const Partner = () => {
                 >
                   Email
                 </p>
-                <p>bensu@gmail.com</p>
+                <p>{profileData?.data?.data?.profile.email}</p>
                 <br />
                 <p
                   style={{
@@ -60,7 +88,7 @@ const Partner = () => {
                 >
                   Phone
                 </p>
-                <p>089876543211</p>
+                <p>{profileData?.data?.data?.profile.phone}</p>
               </div>
             </div>
           </div>

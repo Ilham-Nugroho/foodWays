@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useQuery } from "react-query";
+import { useHistory } from "react-router";
+import { Link, useParams } from "react-router-dom";
+
+import { API } from "../../config/api";
+
 import Navbar from "../../components/navbar-in";
-import { Link } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const User = () => {
+  const [state, dispatch] = useContext(UserContext);
+  const { id } = useParams();
+  const history = useHistory();
+
+  if (state.user.id != id) {
+    history.push("/");
+  }
+
+  const {
+    data: profileData,
+    error: profileError,
+    loading: profileLoading,
+    refetch: profileRefetch,
+  } = useQuery(["profileCache", id], async () => {
+    return API.get(`/profile/${id}`);
+  });
+
   return (
     <div>
       <Navbar />
@@ -20,9 +43,12 @@ const User = () => {
             <div className="d-flex mt-3">
               <div>
                 <div>
-                  <img src="/img/profpic.png" />
+                  <img
+                    src={profileData?.data?.data?.profile.avatar}
+                    style={{ height: "300px", width: "250px" }}
+                  />
                 </div>
-                <Link to="/user/edit">
+                <Link to={`/user/${state.user.id}/edit`}>
                   <button className="btn btn-md edit-profile mt-3">
                     Edit Profile
                   </button>
@@ -38,7 +64,7 @@ const User = () => {
                 >
                   Full Name
                 </p>
-                <p>Andi</p>
+                <p>{profileData?.data?.data?.profile.name}</p>
                 <br />
                 <p
                   style={{
@@ -49,7 +75,7 @@ const User = () => {
                 >
                   Email
                 </p>
-                <p>andigans@gmail.com</p>
+                <p>{profileData?.data?.data?.profile.email}</p>
                 <br />
                 <p
                   style={{
@@ -60,7 +86,7 @@ const User = () => {
                 >
                   Phone
                 </p>
-                <p>081234567899</p>
+                <p>{profileData?.data?.data?.profile.phone}</p>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ const DropUser = () => {
     <div id="nav-dropdown">
       <NavDropdown.Item
         as={Link}
-        to="/user"
+        to={`/user/${state.user.id}`}
         className="nav-dropdown d-flex justify-content-start"
       >
         <img

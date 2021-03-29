@@ -75,13 +75,13 @@ function App() {
 
               <PrivateRoute exact path="/menu/:id" component={Detail} />
               <PrivateRoute exact path="/:id/menu" component={Menu} />
-              <PrivateRoute exact path="/user" component={User} />
-              <PrivateRoute exact path="/user/edit" component={EditUser} />
-              <PrivateRoute exact path="/partner" component={Partner} />
+              <PrivateRoute exact path="/user/:id" component={User} />
+              <PrivateRoute exact path="/user/:id/edit" component={EditUser} />
+              <PrivateRoute exact path="/partner/:id" component={Partner} />
               <PrivateRoute exact path="/cart" component={Cart} />
               <PrivateRoute
                 exact
-                path="/partner/edit"
+                path="/partner/:id/edit"
                 component={EditPartner}
               />
               <PrivateRoute exact path="/:id/add-menu" component={AddMenu} />

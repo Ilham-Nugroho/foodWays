@@ -1,123 +1,156 @@
-import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+
+import { useHistory } from "react-router";
+import { useQuery, useMutation } from "react-query";
+import { Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+
+import { API } from "../../config/api";
 
 import Navbar from "../../components/navbar-in";
-import Map from "../../components/mapBox";
+import { UserContext } from "../../context/userContext";
 
-const EditUser = () => {
-  const [user, setUser] = useState({
-    fullname: "",
-    email: "",
+const EditPartner = () => {
+  const [state, dispatch] = useContext(UserContext);
+  const { id } = useParams();
+  const history = useHistory();
+  const [form, setForm] = useState({
+    name: "",
     phone: "",
     location: "",
+    avatar: null,
+  });
+
+  const { name, phone, location, avatar } = form;
+
+  const {
+    data: profileData,
+    error: profileError,
+    loading: profileLoading,
+    refetch: profileRefetch,
+  } = useQuery(["editProfileCache", id], async () => {
+    return API.get(`/profile/${id}`);
+  });
+
+  if (id != state.user.id) {
+    history.push("/");
+  }
+
+  const updateProfile = useMutation(async () => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const body = new FormData();
+
+    body.append("name", name);
+    body.append("phone", phone);
+    body.append("location", location);
+    body.append("imageFile", avatar);
+
+    await API.patch(`/profile/${state.user.id}`, body, config);
+    profileRefetch();
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    const tempForm = { ...form };
+
+    tempForm[event.target.name] =
+      event.target.type === "file" ? event.target.files[0] : event.target.value;
+    setForm(tempForm);
   };
 
-  const [show, setShow] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const handleClose = () => {
-    setShow(false);
+    updateProfile.mutate();
+
+    setForm({
+      name: "",
+      phone: "",
+      location: "",
+      avatar: null,
+    });
   };
 
   return (
-    <div>
-      <Navbar />
+    <div style={{ backgroundColor: " #e5e5e5" }} className="pb-5">
+      <div className="bg-color-full ">
+        <Navbar />
 
-      <div className="profile">
-        <h2>Edit Profile</h2>
-        <div className="d-flex justify-content-between mt-3">
-          <div style={{ width: "81%" }}>
-            <input
-              type="text"
-              name="fullname"
-              value={user.fullname}
-              className="form-control"
-              placeholder="Full Name"
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="">
-            <button
-              className="btn btn-sm attach"
-              style={{
-                backgroundColor: "#e5e5e5",
-                color: "black",
-                borderColor: "black",
-              }}
-            >
-              <label className="d-flex pt-2" style={{ fontSize: "15px" }}>
-                Attach File
-                <img
-                  className=" pl-2"
-                  src="/img/files.png"
-                  style={{ height: "20px" }}
-                />
-                <input type="file" hidden />
+        <div className="profile ">
+          <form onSubmit={(event) => handleSubmit(event)}>
+            <h2>Edit Partner</h2>
+            <div className="mt-4 form-group">
+              <label style={{ fontWeight: "600", fontSize: "18px" }}>
+                Full Name
               </label>
-            </button>
-          </div>
-        </div>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                className="form-control"
+                placeholder="Full Name"
+                onChange={(event) => handleChange(event)}
+              ></input>
+            </div>
 
-        <input
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="form-control mt-3"
-        ></input>
-        <input
-          type="text"
-          name="phone"
-          value={user.phone}
-          onChange={handleChange}
-          placeholder="Phone"
-          className="form-control mt-3"
-        ></input>
+            <div className="form-group mt-4">
+              <label style={{ fontWeight: "600", fontSize: "18px" }}>
+                Avatar
+              </label>
+              <div>
+                <input
+                  type="file"
+                  onChange={(event) => handleChange(event)}
+                  name="avatar"
+                  className="form-control"
+                />
+              </div>
+            </div>
 
-        <div className="d-flex justify-content-between mt-3">
-          <input
-            placeholder="Location"
-            className="form-control"
-            type="text"
-            name="location"
-            value={user.location}
-            onChange={handleChange}
-          ></input>
-          <button
-            className="location-btn btn btn-md"
-            onClick={() => {
-              setShow(true);
-            }}
-          >
-            Select On Map
-          </button>
-        </div>
-        <div className="justify-content-end d-flex ">
-          <button className="btn btn-lg btn-primary mt-5 save">Save</button>
+            <div className="mt-4">
+              <label style={{ fontWeight: "600", fontSize: "18px" }}>
+                Phone Number
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={phone}
+                onChange={(event) => handleChange(event)}
+                placeholder="Phone"
+                className="form-control"
+              ></input>
+            </div>
+
+            <div className="mt-4">
+              <label style={{ fontWeight: "600", fontSize: "18px" }}>
+                Location
+              </label>
+              <div className="d-flex justify-content-between">
+                <input
+                  placeholder="Location"
+                  className="form-control"
+                  type="text"
+                  name="location"
+                  value={location}
+                  onChange={(event) => handleChange(event)}
+                ></input>
+                <button className="location-btn btn btn-md">
+                  Select On Map
+                </button>
+              </div>
+            </div>
+            <div className="justify-content-end d-flex ">
+              <button className="btn btn-lg btn-primary mt-5 save">Save</button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        size="lg"
-        style={{ height: "600px" }}
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          <Map />
-        </Modal.Body>
-      </Modal>
     </div>
   );
 };
 
-export default EditUser;
+export default EditPartner;

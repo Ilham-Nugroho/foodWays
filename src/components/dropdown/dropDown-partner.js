@@ -1,5 +1,10 @@
 import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import { useQuery } from "react-query";
+
+import { API } from "../../config/api";
+
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { UserContext } from "../../context/userContext";
 
@@ -16,7 +21,7 @@ const DropPartner = () => {
     <div id="nav-dropdown">
       <NavDropdown.Item
         as={Link}
-        to="/user"
+        to={`/partner/${state.user.id}`}
         className="nav-dropdown d-flex justify-content-start"
       >
         <img
