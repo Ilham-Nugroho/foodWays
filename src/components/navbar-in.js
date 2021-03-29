@@ -32,6 +32,10 @@ const NavbarIn = () => {
     />
   );
 
+  const totalQty = cartState.carts.reduce((qty, item) => {
+    return qty + item.qty;
+  }, 0);
+
   return (
     <div>
       <Navbar id="nav" expand="lg" variant="dark">
@@ -62,7 +66,7 @@ const NavbarIn = () => {
                 variant="danger"
                 style={{ position: "relative", bottom: "10px", right: "10px" }}
               >
-                {cartState.carts.length > 0 ? cartState.carts.length : null}
+                {totalQty > 0 ? totalQty : null}
               </Badge>
             </Nav.Link>
             <NavDropdown title={profileImg} id="nav-dropdown">

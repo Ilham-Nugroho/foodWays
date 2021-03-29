@@ -38,7 +38,7 @@ const reducer = (state, action) => {
           partnerId: payload.profileId,
         };
       }
-
+      console.log(state);
       if (state.partnerId != null && state.partnerId != payload.profileId) {
         alert("You can just order from one restaurant at the time");
         return state;

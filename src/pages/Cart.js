@@ -6,10 +6,10 @@ import Navbar from "../components/navbar-in";
 import Map from "../components/mapBox";
 
 const Cart = () => {
-  const [state, dispatch] = useContext(CartContext);
+  const [cartState, cartDispatch] = useContext(CartContext);
 
   const addOrderToCart = (id) => {
-    dispatch({
+    cartDispatch({
       type: "ADD_CART",
       payload: {
         id,
@@ -18,7 +18,7 @@ const Cart = () => {
   };
 
   const subOrderFromCart = (id) => {
-    dispatch({
+    cartDispatch({
       type: "SUB_CART",
       payload: {
         id,
@@ -27,7 +27,7 @@ const Cart = () => {
   };
 
   const deleteProductFromCart = (id) => {
-    dispatch({
+    cartDispatch({
       type: "REMOVE_CART",
       payload: {
         id,
@@ -41,6 +41,35 @@ const Cart = () => {
     setShow(false);
   };
 
+  //-----------------------------------------------------------------------------------------------------------------
+
+  const totalItemPrice = cartState.carts.reduce((amount, item) => {
+    const totalAmountPerProduct = item.menuPrice * item.qty;
+    return amount + totalAmountPerProduct;
+  }, 0);
+
+  const totalQty = cartState.carts.reduce((qty, item) => {
+    return qty + item.qty;
+  }, 0);
+
+  // console.log(totalQty);
+
+  const submitTransaction = () => {
+    const body = {
+      partner_id: cartState.partnerId,
+      products: cartState.carts.map((product) => ({
+        id: product.id,
+        qty: product.qty,
+      })),
+    };
+  };
+
+  // makeTransaction.mutate(JSON.stringify(body, null, 2))
+  //   cartDispatch({
+  //     type: "SUBMIT_CART",
+  //     payload: { partnerId: null},
+  //   });
+  //-----------------------------------------------------------------------------------------------------------------
   return (
     <div>
       <Navbar />
@@ -67,7 +96,7 @@ const Cart = () => {
         <hr style={{ borderTop: "solid" }} />
         <div className="d-flex justify-content-between mt-4">
           <div className="order-menu ">
-            {state.carts.map((cart) => (
+            {cartState.carts.map((cart) => (
               <div>
                 <div className="d-flex justify-content-between ">
                   <div className="d-flex ">
@@ -130,7 +159,7 @@ const Cart = () => {
             </div>
             <div className="order-price-content mb-3">
               <p>Qty</p>
-              <p>{state.carts.length}</p>
+              <p>{totalQty}</p>
             </div>
             <div className="order-price-content mb-3 pb-1">
               <p>Ongkir</p>
@@ -141,7 +170,7 @@ const Cart = () => {
 
             <div className="order-price-content mb-3">
               <p>Total</p>
-              <p>Biaya Total</p>
+              <p>Rp. {totalItemPrice}</p>
             </div>
           </div>
         </div>
